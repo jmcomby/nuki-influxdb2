@@ -79,7 +79,7 @@ else:
 
 
 # influxDBv2
-if influxdb2_ssl_str:
+if influxdb2_ssl_str.lower == "true":
     influxdb2_url="https://" + influxdb2_host + ":" + str(influxdb2_port)
 else:
     influxdb2_url="http://" + influxdb2_host + ":" + str(influxdb2_port)
@@ -166,7 +166,6 @@ if nukiBridge:
     senddata["measurement"]="signal"
     senddata["tags"]={}
     senddata["tags"]["origin"]="Nuki"
-    senddata["tags"]["source"]="docker nuki-influxdb2"
     senddata["fields"]={}
 
     # pass info
@@ -189,7 +188,6 @@ if nukiBridge:
 
 # get Nuki Web API
 baseURL="https://api.nuki.io"
-
 
 pathURL="smartlock"
 url=baseURL+"/"+pathURL
@@ -273,7 +271,6 @@ for key in devList:
     senddata["measurement"]="lock"
     senddata["tags"]={}
     senddata["tags"]["origin"]="Nuki"
-    senddata["tags"]["source"]="docker nuki-influxdb2"
     senddata["tags"]["host"]=name
     senddata["fields"]={}
     senddata["fields"]["trigger"]=trigger
